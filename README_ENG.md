@@ -13,7 +13,7 @@ GitHub CCurl/forth-dwc
 https://github.com/CCurl/forth-dwc  
   
   
-[Deepening my understanding of forth-dwc with ChatGPT (Part 1)](kawakudari_conversation_US.md)  
+[Deepening my understanding of forth-dwc with ChatGPT (Part 1)](ChatGPT_Kawakudari_01_ENG.MD)  
   
   
 

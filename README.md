@@ -12,7 +12,7 @@ GitHub CCurl/forth-dwc
 https://github.com/CCurl/forth-dwc  
   
   
-[・ChatGPTとのforth-dwcの理解を深める（その１）](https://chatgpt.com/share/6883f871-d73c-800c-b1e4-c9ac72bb274d)  
+[・ChatGPTとのforth-dwcの理解を深める（その１）](ChatGPT_Kawakudari_01.MD)  
   
 
 

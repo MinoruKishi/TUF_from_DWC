@@ -113,16 +113,16 @@ return 0;
 
 ### Explanation and correspondence
 
-| IchigoJam BASIC       | Meaning                                   | Correspondence in C language                     |
-|-----------------------|-----------------------            --------|----------------            ----------------------|
-| `CLS`                 | Clear screen                              | `system(“clear”)`                                |
-| `X=16`                | Initial position                          | `int x = 16;`                |
-| `LC X,5:? “ì”`        | Display character at X coordinate, line 5 | `screen[5][x] = ‘O’;` |
-| `LC RND(32),23:? “*”` | Place obstacle at random position         | `obs_x = rand() % 32; screen[23][obs_x] = ‘*’;` |
-| `WAIT 3`              | Wait                                      | `usleep(100000);` |
-| `X=X-BTN(28)+BTN(29)` | Move left or right (←28,→29)              | Increase or decrease x based on key input |
-| `IF SCR(X,5) END`     | Collision detection(Character position)   | `if (screen[5][x] == ‘*’) break;` |
-| `GOTO 20`             | Loop                                      | `while(1) {...}` |
+| IchigoJam BASIC       | Meaning                                   | Correspondence in C language                     |  
+|-----------------------|-----------------------            --------|----------------            ----------------------|  
+| `CLS`                 | Clear screen                              | `system(“clear”)`                                |  
+| `X=16`                | Initial position                          | `int x = 16;`                |  
+| `LC X,5:? “ì”`        | Display character at X coordinate, line 5 | `screen[5][x] = ‘O’;` |  
+| `LC RND(32),23:? “*”` | Place obstacle at random position         | `obs_x = rand() % 32; screen[23][obs_x] = ‘*’;` |  
+| `WAIT 3`              | Wait                                      | `usleep(100000);` |  
+| `X=X-BTN(28)+BTN(29)` | Move left or right (←28,→29)              | Increase or decrease x based on key input |  
+| `IF SCR(X,5) END`     | Collision detection(Character position)   | `if (screen[5][x] == ‘*’) break;` |  
+| `GOTO 20`             | Loop                                      | `while(1) {...}` |  
 
 ---
 

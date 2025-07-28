@@ -3,8 +3,11 @@ Kawakudari_by_FORTH-DWC_01
 私の質問：  
 次のプログラムをC言語に直せますか？  
   
-IchigoJam 川下り  
+---  
   
+### IchigoJam 川下り  
+  
+```  
 10 CLS:X=16  
 20 LC X,5:?"ì"  
 30 LC RND(32),23:?"*"  
@@ -12,6 +15,8 @@ IchigoJam 川下り
 36 X=X-BTN(28)+BTN(29)  
 37 IF SCR(X,5) END  
 40 GOTO 20  
+```
+---  
   
   
 ChatGPTの返事：  

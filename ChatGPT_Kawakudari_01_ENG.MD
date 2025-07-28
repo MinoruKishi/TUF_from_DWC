@@ -1,6 +1,6 @@
 Kawakudari_by_FORTH-DWC_01
 
-####My question:
+#### My question:
 Can you convert the following program to C language?
 
 ---

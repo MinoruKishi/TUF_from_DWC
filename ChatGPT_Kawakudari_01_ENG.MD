@@ -19,12 +19,11 @@ Can you convert the following program to C language?
 ---
 
 
-ChatGPT's response:
-Yes, it is possible to rewrite the IchigoJam BASIC “River Descent Game” in C language. However, IchigoJam has its own commands (`LC`, `SCR`, `BTN`, etc.) and screen control, so a mechanism to replace them is necessary to port it to C language.
+## ChatGPT's response:  
+Yes, it is possible to rewrite the IchigoJam BASIC “River Descent Game” in C language. However, IchigoJam has its own commands (`LC`, `SCR`, `BTN`, etc.) and screen control, so a mechanism to replace them is necessary to port it to C language.  
  
-
-Below is a **simplified text-based C language version of the river rafting game (for console use)**. This example is limited to what can be done in standard C and simplifies keyboard input and screen drawing (assumes UNIX/Linux/macOS terminal).
-
+Below is a **simplified text-based C language version of the river rafting game (for console use)**. This example is limited to what can be done in standard C and simplifies keyboard input and screen drawing (assumes UNIX/Linux/macOS terminal).  
+  
 ---
 
 ### C language version (for terminal, move with left and right keys)
@@ -114,16 +113,16 @@ return 0;
 
 ### Explanation and correspondence
 
-| IchigoJam BASIC | Meaning | Correspondence in C language |
-|-------------------------|-------------------------------|--------------------------------------|
-| `CLS` | Clear screen | `system(“clear”)` |
-| `X=16` | Initial position | `int x = 16;` |
-| `LC X,5:? “ì”` | Display character at X coordinate, line 5 | `screen[5][x] = ‘O’;` |
-| `LC RND(32),23:? “*”` | Place obstacle at random position | `obs_x = rand() % 32; screen[23][obs_x] = ‘*’;` |
-| `WAIT 3` | Wait | `usleep(100000);` |
-| `X=X-BTN(28)+BTN(29)` | Move left or right (←28,→29) | Increase or decrease x based on key input |
-| `IF SCR(X,5) END` | Collision detection(Character position) | `if (screen[5][x] == ‘*’) break;` |
-| `GOTO 20` | Loop | `while(1) {...}` |
+| IchigoJam BASIC       | Meaning                                   | Correspondence in C language                     |
+|-----------------------|-----------------------            --------|----------------            ----------------------|
+| `CLS`                 | Clear screen                              | `system(“clear”)`                                |
+| `X=16`                | Initial position                          | `int x = 16;`                |
+| `LC X,5:? “ì”`        | Display character at X coordinate, line 5 | `screen[5][x] = ‘O’;` |
+| `LC RND(32),23:? “*”` | Place obstacle at random position         | `obs_x = rand() % 32; screen[23][obs_x] = ‘*’;` |
+| `WAIT 3`              | Wait                                      | `usleep(100000);` |
+| `X=X-BTN(28)+BTN(29)` | Move left or right (←28,→29)              | Increase or decrease x based on key input |
+| `IF SCR(X,5) END`     | Collision detection(Character position)   | `if (screen[5][x] == ‘*’) break;` |
+| `GOTO 20`             | Loop                                      | `while(1) {...}` |
 
 ---
 

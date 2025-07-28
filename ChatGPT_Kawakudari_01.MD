@@ -134,16 +134,18 @@ int main() {
   
 ---
 
-ご希望があれば、**Windows用（conio.h 使用）** や **より本格的な移植** も対応できます。
-私の質問：
-今度は川下りのプログラムをforth言語に変換できますか？参考にするforth言語は以下のものを使用してください。
+ご希望があれば、**Windows用（conio.h 使用）** や **より本格的な移植** も対応できます。  
+  
+私の質問：  
+今度は川下りのプログラムをforth言語に変換できますか？参考にするforth言語は以下のものを使用してください。  
+  
+https://github.com/CCurl/forth-dwc/tree/main  
 
-https://github.com/CCurl/forth-dwc/tree/main
-ChatGPTの返事：
-IchigoJam BASIC の「川下り」ゲームを Forth 言語（依存先として指定された【forth‑dwc】プロジェクトを想定）に移植する場合、まずは基本的な構造と画面・入力制御のインターフェースを明確にする必要があります。以下は、BASIC プログラムを Forth 風に表現した雛形コードです。実際には、`forth‑dwc` 固有の I/O ワード（例えば `CLEAR-SCREEN`, `DRAW-CHAR`, `RANDOM`, `KEY?`, `KEY? LEFT?`, `KEY? RIGHT?`, `COLLISION?` など）に置き換えてください。
-
+ChatGPTの返事：  
+IchigoJam BASIC の「川下り」ゲームを Forth 言語（依存先として指定された【forth‑dwc】プロジェクトを想定）に移植する場合、まずは基本的な構造と画面・入力制御のインターフェースを明確にする必要があります。以下は、BASIC プログラムを Forth 風に表現した雛形コードです。実際には、`forth‑dwc` 固有の I/O ワード（例えば `CLEAR-SCREEN`, `DRAW-CHAR`, `RANDOM`, `KEY?`, `KEY? LEFT?`, `KEY? RIGHT?`, `COLLISION?` など）に置き換えてください。  
+  
 ---
-
+  
 ```forth
 \ 基本設定
 VARIABLE x

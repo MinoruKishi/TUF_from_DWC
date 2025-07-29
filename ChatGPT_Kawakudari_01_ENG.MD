@@ -1,7 +1,7 @@
-Kawakudari_by_FORTH-DWC_01
-
-# My question:
-Can you convert the following program to C language?
+Kawakudari_using_FORTH-DWC_01:  
+  
+# My question:  
+Can you convert the following program to C language?  
 
 ---
 

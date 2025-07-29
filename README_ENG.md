@@ -21,7 +21,7 @@ https://github.com/CCurl/forth-dwc
   
 ## Conversation Log:  
   
-[ Deepening Understanding of ChatGPT and Forth-DWC (Part 1)](ChatGPT_Kawakudari_01.MD)  
+[ Deepening Understanding of ChatGPT and Forth-DWC (Part 1)](ChatGPT_Kawakudari_01_ENG.MD)  
   
   
 ---

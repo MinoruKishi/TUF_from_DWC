@@ -135,18 +135,18 @@ return 0;
 
 ---
 
-If desired, I can also provide a **Windows version (using conio.h)** or a **more complete port**.
-
-My question:
-Can you convert the river rafting program to Forth language? Please use the following Forth language as a reference.
-
-https://github.com/CCurl/forth-dwc/tree/main 
-
-ChatGPT's response:
-When porting the “river rafting” game from IchigoJam BASIC to Forth language (assuming the specified dependency project 【forth‑dwc】), it is first necessary to clarify the basic structure and interface for screen and input control. The following is a template code that expresses the BASIC program in a Forth-style format.In practice, replace these with `forth‑dwc`-specific I/O words (e.g., `CLEAR-SCREEN`, `DRAW-CHAR`, `RANDOM`, `KEY?`, `KEY? LEFT?`, `KEY? RIGHT?`, `COLLISION?`, etc.). 
-
+If desired, I can also provide a **Windows version (using conio.h)** or a **more complete port**.  
+  
+## My question:  
+Can you convert the river rafting program to Forth language? Please use the following Forth language as a reference.  
+  
+https://github.com/CCurl/forth-dwc/tree/main  
+  
+## ChatGPT's response:  
+When porting the “river rafting” game from IchigoJam BASIC to Forth language (assuming the specified dependency project 【forth‑dwc】), it is first necessary to clarify the basic structure and interface for screen and input control. The following is a template code that expresses the BASIC program in a Forth-style format.In practice, replace these with `forth‑dwc`-specific I/O words (e.g., `CLEAR-SCREEN`, `DRAW-CHAR`, `RANDOM`, `KEY?`, `KEY? LEFT?`, `KEY? RIGHT?`, `COLLISION?`, etc.).   
+  
 ---
-
+  
 ```forth
 \ Basic settings
 VARIABLE x
@@ -196,11 +196,11 @@ main-loop
 \ Execute
 start-game
 ```
-
+  
 ---
-
-### Explanation
-
+  
+### Explanation  
+  
 - `VARIABLE x`, `x !`, `x @`: Declares, sets, and retrieves the variable `x`.
 - `init-screen`: Clears the screen(equivalent to `CLS`). 
 - `draw-player`: Draws the character (here, `‘ì’`) at the specified position.
@@ -211,7 +211,7 @@ start-game
 - `start-game`: Initialization and call to the main loop.
 
 ---
-
+  
 ### To specialize for `forth‑dwc`...
 
 The `forth‑dwc` repository (see link) probably contains the following words:
@@ -247,14 +247,17 @@ By dividing words into roles such as `draw-player`, `draw-obstacle`, `update-inp
 
 ---
 
-If you would like to create actual `forth‑dwc` code together, please let me know the specific I/O word names or sample code in the repository, and I can provide more detailed porting examples!
-My question:
-Can I write DRAW-CHAR from the Forth example you showed me using the 32-bit library on Debian?
-ChatGPT's response:
-The following is a concrete example of the I/O words (e.g., `DRAW-CHAR`) in the `forth‑dwc` repository, written specifically for a standard Forth implementation (e.g., Gforth) running on a Debian 32-bit (IA‑32 / i386) environment.
+If you would like to create actual `forth‑dwc` code together, please let me know the specific I/O word names or sample code in the repository, and I can provide more detailed porting examples!  
 
+  
+## My question:  
+Can I write DRAW-CHAR from the Forth example you showed me using the 32-bit library on Debian?  
+  
+## ChatGPT's response:  
+The following is a concrete example of the I/O words (e.g., `DRAW-CHAR`) in the `forth‑dwc` repository, written specifically for a standard Forth implementation (e.g., Gforth) running on a Debian 32-bit (IA‑32 / i386) environment.  
+  
 ---
-
+  
 ## ✅ Overview
 
 - In general Forth (e.g., Gforth) that can be used on Debian i386, **`EMIT`** is used for character output. 
@@ -361,13 +364,16 @@ start-game
 - If you want to match the word names in the `forth‑dwc` repository exactly, you can replace them in this template with those from the repository environment.
 
 ---
+  
+If there are specific word names (such as `CLS`, `RANDOM`, `SCR?`, `SLEEP`, `KEY? LEFT?`) in `forth‑dwc`, we can describe them more accurately by matching them to those names. If you could provide the symbol names from the repository, we can accommodate that!  
 
-If there are specific word names (such as `CLS`, `RANDOM`, `SCR?`, `SLEEP`, `KEY? LEFT?`) in `forth‑dwc`, we can describe them more accurately by matching them to those names. If you could provide the symbol names from the repository, we can accommodate that!
-My question:
-This is a question for my own understanding, but in order to actually run the river-rafting program written in Forth, would it be possible to infer the necessary specifications from the specifications of my PC? Or should I create a list of new words that need to be created and answer how those new words should be implemented in such a mechanism?
-ChatGPT's response:
-That's a very good question. Here is a clear direction for your question.
-
+  
+## My question:  
+This is a question for my own understanding, but in order to actually run the river-rafting program written in Forth, would it be possible to infer the necessary specifications from the specifications of my PC? Or should I create a list of new words that need to be created and answer how those new words should be implemented in such a mechanism?  
+  
+## ChatGPT's response:  
+That's a very good question. Here is a clear direction for your question.  
+  
 ---
 
 ## ✅ In conclusion:
@@ -446,11 +452,12 @@ is also possible.
 ---
 
 ## ✅ Please let us know your preference
-
-Which of the following would you like to proceed with?
-
+  
+Which of the following would you like to proceed with?  
+  
 1. 🔍 **We will automatically list the words, and you will respond with the specifications.**
 2. ✍️ **You decide the specifications, such as “I want this word to do this,” and we implement them**
 3. 🧪 **First, we present all the general temporary implementations for Linux (Debian), and then we adjust them later**
-
+    
 Please let us know which method you prefer. We can proceed smoothly from there.
+  

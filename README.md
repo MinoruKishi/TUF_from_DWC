@@ -11,8 +11,7 @@ ChatGPTを使ってIchigoJamの川下りゲーム（BASIC言語）をforth-DWC�
 IchigoJam かわくだりゲーム改造法 ITってなに？フェスティバル プログラミング体験の復習  
 https://fukuno.jig.jp/1924  
   
-GitHub CCurl/forth-dwc  
-https://github.com/CCurl/forth-dwc  
+forth-dwcについてはFacebookのFORTH2020グループの会話の中で教えていただきました。  
   
 ---
   

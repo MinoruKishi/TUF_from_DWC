@@ -140,7 +140,7 @@ int main() {
 # 私の質問：  
 今度は川下りのプログラムをforth言語に変換できますか？参考にするforth言語は以下のものを使用してください。  
   
-https://github.com/CCurl/forth-dwc/tree/main  
+xxxxx.xxx  -->  
 
   
 # ChatGPTの返事：  

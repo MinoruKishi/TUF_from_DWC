@@ -12,6 +12,7 @@ IchigoJam かわくだりゲーム改造法 ITってなに？フェスティバ�
 https://fukuno.jig.jp/1924  
   
 forth-dwcについてはFacebookのFORTH2020グループの会話の中で教えていただきました。  
+https://github.com/CCurl/forth-dwc/tree/main  
   
 ---
   

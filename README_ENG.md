@@ -14,8 +14,7 @@ IchigoJam Kawakudari Game Modification Method What is IT? Festival Programming E
 (Written in Japanese)  
 https://fukuno.jig.jp/1924  
   
-GitHub CCurl/forth-dwc  
-https://github.com/CCurl/forth-dwc  
+I learned about forth-dwc from a conversation in the FORTH2020 group on Facebook.
   
 ---
   

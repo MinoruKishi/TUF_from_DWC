@@ -6,13 +6,15 @@
 ご質問のように、MS-DOS 時代に INT 10h（BIOS割り込み）で画面制御やキー入力を直接操作していた頃と同じようなことを、現代の Linux（32bit環境）で再現するには、アプローチが大きく異なります。以下に、目的別にその代替手段を体系的にまとめます。  
   
 ✅ 結論：Linux では BIOS 直叩きは不可。代替は主に以下の3つ  
-目的	MS-DOS の方法	Linux での代表的代替方法  
-画面出力	INT 10h AH=0Eh	ncurses / ANSI escape sequences  
-画面クリア	INT 10h AH=06h	ANSI "\033[2J" や ncurses::clear()  
-カーソル移動	INT 10h AH=02h	ANSI "\033[<row>;<col>H"  
-キー入力	INT 16h AH=00h	termios + read() / ncurses::getch()  
-キャラクタ取得	直接 VRAM アクセス	仮想端末(TTY)から read() / termios  
-ランダム生成	DOS API か RTC	rand() / /dev/urandom / getrandom()  
+
+|目的	|MS-DOS の方法|	Linux での代表的代替方法|
+|-----|------------|------------------------|
+|画面出力	|INT 10h AH=0Eh	|ncurses / ANSI escape sequences|  
+|画面クリア	|INT 10h AH=06h	|ANSI "\033[2J" や ncurses::clear()|  
+|カーソル移動	|INT 10h AH=02h	|ANSI "\033[<row>;<col>H"|  
+|キー入力	|INT 16h AH=00h	|termios + read() / ncurses::getch()|  
+|キャラクタ取得	|直接 VRAM アクセス	|仮想端末(TTY)から read() / termios|  
+|ランダム生成	|DOS API か RTC	|rand() / /dev/urandom / getrandom()  
   
 🔧 方式①：ANSI エスケープシーケンス（最も簡易）  
 特徴：  

@@ -1,8 +1,9 @@
-You: 
+# 私の質問：  
+
 
 昔の話で申し訳ないが、MS-DOSの時代では、DisplayBIOS（INT 10H)を直接叩いて、キー入出力や画面のクリアなどを行った記憶があります。現代のLinuxPC（今回は３２ビットの環境で行います）で同じことを行おうとすると、どのような方法が考えられますか？
 
-ChatGPT: 
+# ChatGPTの返事：  
 
 ご質問のように、MS-DOS 時代に `INT 10h`（BIOS割り込み）で画面制御やキー入力を直接操作していた頃と同じようなことを、**現代の Linux（32bit環境）で再現するには、アプローチが大きく異なります**。以下に、目的別にその代替手段を体系的にまとめます。
 
@@ -150,11 +151,11 @@ tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
 
 などもすぐ提示できます。どの方向性で進めたいかお聞かせください。
 
-You: 
+# 私の質問：  
 
 いろいろな実現手段を教えてくれてありがとう。勉強のために、「termios をForthから呼び出す方法」を教えてもらえますか？
 
-ChatGPT: 
+# ChatGPTの返事：  
 
 こちらこそ、前向きなご質問をありがとうございます。  
 **termios を Forth から呼び出す方法**は、  
@@ -341,11 +342,11 @@ disable-raw
 
 など、気軽に聞いてください！
 
-You: 
+# 私の質問：  
 
 どちらも魅力的な提案です。 まずは実際に動かしてみたいのですが、準備や手順など必要な作業を教えてもらえますか？
 
-ChatGPT: 
+# ChatGPTの返事：  
 
 素晴らしいです！  
 ここでは、**Debian/Linux (32bit) 環境で Gforth を使い、termios をForthから呼び出す**ためのステップを、初心者にもわかりやすく整理します。
@@ -501,11 +502,11 @@ test-raw-input
 
 ご希望があればどれからでも着手できます。どうされますか？
 
-You: 
+# 私の質問：  
 
 以下のように実行しました。 $ gforth --version gforth 0.7.3 $ gforth rawinput.fs ところが、以下のようなエラーが発生してしまいました。 これは　add-header　が定義されていないからではないでしょうか？ in file included from \*OS command line\*:-1 rawinput.fs:7: Undefined word s" termios.h" >>>add-header<<< Backtrace: $7F71BCCE7A68 throw $7F71BCCFDDB0 no.extensions $7F71BCCE7D28 interpreter-notfound1
 
-ChatGPT: 
+# ChatGPTの返事：  
 
 ご指摘のとおり、**`add-header` が定義されていないためにエラーが発生しています。**  
 このワードは Gforth 0.7.3 には存在せず、**`libcc` の新しい拡張でのみ利用できるワード**です。
@@ -618,11 +619,11 @@ test-raw-input
 
 「次はこれをやってみたい」と思うものを教えていただければ、すぐに準備します。
 
-You: 
+# 私の質問：  
 
 念のための確認ですが、今インストールしたgforthが最新版だったので、今回作成したrawinput.fsが古いバージョンのためにエラーが発生した。ファイルを修正方法（rawinput.fs を以下のように変更）の変更すると問題ないはずだ、ということでしょうか？
 
-ChatGPT: 
+# ChatGPTの返事：  
 
 はい、まさにその通りです。あなたの理解は**完全に正しい**です。
 

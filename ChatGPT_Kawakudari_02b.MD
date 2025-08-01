@@ -504,11 +504,15 @@ test-raw-input
 
 # 私の質問：  
 
+```
 以下のように実行しました。  
+  
 $ gforth --version  
 gforth 0.7.3  
 $ gforth rawinput.fs  
+  
 ところが、以下のようなエラーが発生してしまいました。 これは　add-header　が定義されていないからではないでしょうか？  
+  
 in file included from \*OS command line\*:-1  
 rawinput.fs:7: Undefined word  
 s" termios.h" >>>add-header<<<  
@@ -517,6 +521,8 @@ $7F71BCCE7A68 throw
 $7F71BCCFDDB0 no.extensions  
 $7F71BCCE7D28 interpreter-notfound1  
 
+```
+  
 # ChatGPTの返事：  
 
 ご指摘のとおり、**`add-header` が定義されていないためにエラーが発生しています。**  

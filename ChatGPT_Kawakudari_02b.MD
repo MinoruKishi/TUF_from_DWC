@@ -1115,7 +1115,7 @@ sudo apt install build-essential libtool-bin
 
 - atxy を次のように作る：
 
----forth
+```forth
 : atxy ( x y -- )
   27 emit [char] [ emit
   swap . [char] ; emit
@@ -1142,37 +1142,44 @@ sudo apt install build-essential libtool-bin
 
 ---
 ## ✅ 問題③：ランダムな障害物の配置
-必要：
-random：0〜31の整数
 
-障害物を記録・移動させるための配列 or スタック管理
+## 必要：
 
-解決案：
-Gforth では random が使える：
+- `random`：0〜31の整数
 
-forth
-コピーする
-編集する
+- 障害物を記録・移動させるための配列 or スタック管理
+
+## 解決案：
+
+- Gforth では random が使える：
+
+```forth
 32 random   \ 0〜31 の乱数
+```
 
 ---
 ## ✅ 問題④：衝突判定（SCR 相当）
-必要：
-描画された位置に * があるかどうかを調べる
 
-解決案：
-仮想バッファを保持（2次元配列など）
+## 必要：
 
-描画時に map[y][x] に char を保存しておく
+- 描画された位置に `*` があるかどうかを調べる
 
-衝突時に map[5][x] = '*' か判定
+## 解決案：
 
-Gforth なら CREATE + ALLOT で2次元バッファが構築できます。
+- 仮想バッファを保持（2次元配列など）
+
+- 描画時に `map[y][x]` に `char` を保存しておく
+
+- 衝突時に `map[5][x] = '*'` か判定
+
+`Gforth` なら `CREATE` + `ALLOT` で2次元バッファが構築できます。
 
 ---
 ## ✅ 問題⑤：ループと時間制御（WAIT）
-必要：
-WAIT or SLEEP 相当
+
+## 必要：
+
+- WAIT or SLEEP 相当
 
 解決案：
 forth

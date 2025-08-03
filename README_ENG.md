@@ -23,11 +23,13 @@ https://github.com/CCurl/forth-dwc/tree/main
   
 [ Deepening Understanding of ChatGPT and Forth-DWC (Part 1)](ChatGPT_Kawakudari_01_ENG.MD)  
   
+[ Deepening Understanding of ChatGPT and Forth-DWC (Part 2)](ChatGPT_Kawakudari_02b_ENG.MD)  
   
 ---
   
 [ Back to Top](README_ENG.md)  
   
+
 
 
 

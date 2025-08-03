@@ -706,7 +706,7 @@ test-raw-input
 ```
 を実行しましたが、  
 
-```
+```pgsql
 :2: Called function of unfinished named C library
 >>>test-raw-input<<< 
 ```
@@ -720,12 +720,13 @@ test-raw-input
 # ChatGPTの返事：  
 とても良い確認です。そして、発生しているエラー：
 
-pgsql
+```pgsql
 コピーする
 編集する
 :2: Called function of unfinished named C library
 >>>test-raw-input<<<
-これは Gforth における libcc の C ライブラリ登録処理（c-library〜end-c-library）が正常に終了していないのに関数を使おうとしたために出るエラーです。
+```
+これは Gforth における `libcc` の C ライブラリ登録処理`（c-library〜end-c-library）`が正常に終了していないのに関数を使おうとしたために出るエラーです。
 
 ## ✅ 原因の本質
 Gforth の c-library ... end-c-library の 中でエラーが起きると、そのライブラリが未完成状態のまま残る

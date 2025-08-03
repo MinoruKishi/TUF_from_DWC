@@ -20,10 +20,12 @@ https://github.com/CCurl/forth-dwc/tree/main
   
 [ ChatGPTとのforth-dwcの理解を深める（その１）](ChatGPT_Kawakudari_01.MD)  
   
+[ ChatGPTとのforth-dwcの理解を深める（その２）](ChatGPT_Kawakudari_02b.MD)  
   
 ---
   
 [ トップに戻る](README.md)  
+
 
 
 

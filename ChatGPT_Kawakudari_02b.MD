@@ -1181,42 +1181,47 @@ sudo apt install build-essential libtool-bin
 
 - WAIT or SLEEP 相当
 
-解決案：
-forth
-コピーする
-編集する
+## 解決案：
+
+```forth
 c-function usleep usleep n -- n
 100000 usleep  \ 0.1秒待つ
+```
+
 ## 🧰 まとめ：実現のためのビルディングブロック
-ワード	必要	実装案／済みか？
-ATXY	✅ 必須	ANSIエスケープで実装可能
-DRAW-CHAR	✅ 必須	ATXY + EMIT で代替可能
-CLEAR-SCREEN	✅ 必須	\033[2J 出力で代替可能
-get-one-char	✅ 必須	termios + getchar 済み
-key-left?	✅ 必須	[char] h = で定義可能
-random	✅ 必須	random そのまま使える
-usleep	✅ 必須	libc の usleep() 利用済み
-バッファ記録	⭕ 要検討	CREATE, ALLOT, C@, C! を使って仮想マップを保持
+
+| ワード	| 必要	| 実装案／済みか？ |
+| --- | --- | --- |
+| ATXY	| ✅ 必須	| ANSIエスケープで実装可能 |
+| DRAW-CHAR	| ✅ 必須	| ATXY + EMIT で代替可能 |
+| CLEAR-SCREEN	| ✅ 必須	| \033[2J 出力で代替可能 |
+| get-one-char	|✅ 必須	| termios + getchar 済み |
+| key-left?	| ✅ 必須	| [char] h = で定義可能 |
+| random	| ✅ 必須	| random そのまま使える |
+| usleep	| ✅ 必須	| libc の usleep() 利用済み |
+| バッファ記録	| ⭕ 要検討	| CREATE, ALLOT, C@, C! を使って仮想マップを保持 |
 
 ## 🚀 次のステップ提案
-画面描画・入力・待機の最小セットを作る（例：「1文字を移動させるだけ」のデモ）
 
-障害物の出現とスクロール処理を作る
+- 画面描画・入力・待機の最小セットを作る（例：「1文字を移動させるだけ」のデモ）
 
-マップに障害物を記録して、SCR 相当の衝突判定を導入
+- 障害物の出現とスクロール処理を作る
 
-すべて統合して「Forth版川下りゲーム」に完成させる
+- マップに障害物を記録して、SCR 相当の衝突判定を導入
+
+- すべて統合して「Forth版川下りゲーム」に完成させる
 
 ## 🎓 学習のための意義
+
 Forth-DWC で川下りを作るというのは、以下の学びを得られます：
 
-Forth のワード設計とモジュール構造の理解
+- Forth のワード設計とモジュール構造の理解
 
-低レイヤでの I/O 制御の具体的構築法
+- 低レイヤでの I/O 制御の具体的構築法
 
-ANSI端末制御、termios、生Cとの連携実例
+- ANSI端末制御、termios、生Cとの連携実例
 
-状態遷移・配列操作・ゲームループ設計の構築
+- 状態遷移・配列操作・ゲームループ設計の構築
 
 ## ✋ 最後に
 ご希望であれば、**ステップ1：「最小のForthゲームエンジンの骨格（1文字描画＋左右移動）」**をすぐに提示できます。

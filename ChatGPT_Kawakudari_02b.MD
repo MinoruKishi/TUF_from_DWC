@@ -994,69 +994,72 @@ rawinput.fs:16: libtool compile failed
   
 `Linux` における "compile failed" 系エラーが出たら：
 
-ツール不足か？（gcc, make, libtool など）
+- ツール不足か？（`gcc`, `make`, `libtool` など）
 
-ヘッダ不足か？（build-essential, libc6-dev, libncurses-dev など）
+- ヘッダ不足か？（`build-essential`, `libc6-dev`, `libncurses-dev` など）
 
-権限不足か？（一時ファイルが作れない等）
+- 権限不足か？（一時ファイルが作れない等）
 
 の順で確認するのが定石です。
 
-🔧 対策を知るための調べ方（実践編）
+##🔧 対策を知るための調べ方（実践編）
+
 ## ✅ 方法①：エラーメッセージで検索する
-bash
-コピーする
-編集する
+
+```bash
 libtool compile failed site:github.com
 libtool compile failed site:stackoverflow.com
-→ たとえば、このページ でも類似の「libtool がない問題」が議論されています。
+```
+→ たとえば、このページ でも類似の「`libtool` がない問題」が議論されています。
 
 ## ✅ 方法②：strace でどの実行ファイルに失敗しているか見る
-bash
-コピーする
-編集する
+```bash
 strace -e execve gforth rawinput.fs
-すると内部で /usr/bin/libtool や /usr/bin/gcc にアクセスしようとしている様子がわかります。
+```
+すると内部で `/usr/bin/libtool` や `/usr/bin/gcc` にアクセスしようとしている様子がわかります。
 
 ## ✅ 方法③：Gforth の libcc.fs 内部を直接読む
-bash
-コピーする
-編集する
+```bash
 locate libcc.fs
 less /usr/share/gforth/0.7.3/libcc.fs
-この中で libtool がどのように呼び出されているか追うことで、仕組みがわかり、必要な外部ツールも明確になります。
+```
+この中で `libtool` がどのように呼び出されているか追うことで、仕組みがわかり、必要な外部ツールも明確になります。
 
-## ✅ 方法④：Gforth の README や依存パッケージを確認
-Gforth のビルド依存パッケージ（実行時にも一部必要）：
+## ✅ 方法④：`Gforth` の `README` や依存パッケージを確認
+`Gforth` のビルド依存パッケージ（実行時にも一部必要）：
 
-bash
-コピーする
-編集する
+```bash
 sudo apt install build-essential libtool-bin
+```
+  
 ## ✅ 教訓：エラー文の意味がすぐにわからないときの3ステップ
-動詞を中心に読む：「compile failed」「cannot open」「undefined symbol」など
 
-ファイル名・ツール名を見つける：「libtool」「gcc」「tcsetattr」など
+- 動詞を中心に読む：「compile failed」「cannot open」「undefined symbol」など
+
+- ファイル名・ツール名を見つける：「libtool」「gcc」「tcsetattr」など
 
 最小のキーワードで検索：
 
-bash
-コピーする
-編集する
+```bash
 "libtool compile failed" gforth
 "c-library end-c-library error" gforth
+```
+  
 ## ✅ まとめ
-観点	内容
-エラーの意味	libcc.fs が内部で libtool を使って共有ライブラリを作ろうとし失敗した
-対策の探し方	エラー動詞で検索、straceで追跡、libcc.fsでソース確認、依存パッケージの調査
-今回の正しい対策	sudo apt install libtool-bin によって必要なツールを補完
+
+| 観点	| 内容 |
+| --- |  --- |
+| エラーの意味	| `libcc.fs` が内部で `libtool` を使って共有ライブラリを作ろうとし失敗した |
+| 対策の探し方	| エラー動詞で検索、`strace`で追跡、`libcc.fs`でソース確認、依存パッケージの調査 |
+| 今回の正しい対策	| `sudo apt install libtool-bin` によって必要なツールを補完 |
 
 ## 📘 参考リンク
-Gforth libcc.fs 実装: /usr/share/gforth/0.7.3/libcc.fs
 
-libtool-bin パッケージ: packages.debian.org
+- `Gforth libcc.fs` 実装: `/usr/share/gforth/0.7.3/libcc.fs`
 
-StackOverflow 検索: "libtool compile failed" site:stackoverflow.com
+- `libtool-bin` パッケージ: `packages.debian.org`
+
+- `StackOverflow` 検索: `"libtool compile failed" site:stackoverflow.com`
 
 ご希望であれば、「strace の使い方」や「gforth の内部の構造を見る方法」もサポートできます。
 
@@ -1075,61 +1078,69 @@ StackOverflow 検索: "libtool compile failed" site:stackoverflow.com
 こちらこそ、深く理解しようとされる姿勢に敬意を表します。そして本題への展開もとても良い流れです。
 
 ## ✅ 本題：Forth-DWC で「川下りゲーム」を実現できるか？
-結論：
-はい、実現可能です。
-ただし、FORTH-DWC 環境における I/O 制御の仕組みを整備する必要があり、
-事前にいくつかの「実装インフラ」を整える必要があります。
+
+## 結論：
+> **はい、実現可能です。**
+> ただし、**FORTH-DWC 環境における I/O 制御の仕組みを整備する必要があり、**
+> **事前にいくつかの「実装インフラ」を整える必要があります。**
 
 ## 🎯 ゴールの再確認：「川下りゲーム」の要素
-IchigoJam BASIC の元ネタから抽象すると、次の5つが必要です：
+`IchigoJam BASIC` の元ネタから抽象すると、次の5つが必要です：
 
-要素	概要
-プレイヤー表示	任意の行に ì を表示
-障害物生成	ランダムな位置に * を表示
-キー入力処理	左右キーに応じてキャラを動かす
-衝突判定	キャラが * に当たったらゲーム終了
-繰り返し処理	ゲームループ（クリア→描画→入力→衝突→ループ）
+| **要素**	| 概要 |
+| --- | --- |
+| **プレイヤー表示**	| 任意の行に `ì` を表示 |
+| **障害物生成**	| ランダムな位置に `*` を表示 |
+| **キー入力処理**	| 左右キーに応じてキャラを動かす |
+| **衝突判定**	| キャラが `*` に当たったらゲーム終了 |
+| **繰り返し処理**	| ゲームループ（クリア→描画→入力→衝突→ループ） |
 
-## 🔍 Forth-DWC において クリアすべき問題
-Forth-DWC は低レイヤ実験環境です（GitHub: forth-dwc）。そのため、上記機能がそのままでは使えない可能性が高いです。
-以下の機能を「明示的に設計・実装」していく必要があります：
+## 🔍 `Forth-DWC` において クリアすべき問題
+`Forth-DWC` は低レイヤ実験環境です（GitHub: forth-dwc）。そのため、**上記機能がそのままでは使えない可能性が高い**です。
+以下の機能を**「明示的に設計・実装」**していく必要があります：
 
+---
 ## ✅ 問題①：画面出力の仕組み
-必要：
-DRAW-CHAR（x y 文字）または ATXY + EMIT
 
-CLEAR-SCREEN（画面全体を消す）
+##必要：
+- `DRAW-CHAR`（`x` `y` 文字）または `ATXY + EMIT`
 
-ATXY（カーソル移動）を ANSI or out 経由で作る
+- `CLEAR-SCREEN`（画面全体を消す）
 
-解決案：
-ANSIエスケープ：最もシンプル（GforthでもOK）
+- `ATXY`（カーソル移動）を `ANSI or out` 経由で作る
 
-atxy を次のように作る：
+##解決案：
 
-forth
-コピーする
-編集する
+- ANSIエスケープ：最もシンプル（GforthでもOK）
+
+- atxy を次のように作る：
+
+---forth
 : atxy ( x y -- )
   27 emit [char] [ emit
   swap . [char] ; emit
   . [char] H emit ;
+```
+
+---
 ## ✅ 問題②：キー入力の仕組み（リアルタイム）
-必要：
-getchar（即時1文字取得）
 
-key-left?, key-right?（←→の判定）
+##必要：
+- `getchar`（即時1文字取得）
 
-解決案：
-Gforth + termios（すでに学習済み）を使って get-one-char, enable-raw, disable-raw を導入済み
+- `key-left?`, `key-right?`（←→の判定）
 
-以下のように判定ワードを追加：
+##解決案：
+- `Gforth + termios`（すでに学習済み）を使って `get-one-char`, `enable-raw`, `disable-raw` を導入済み
 
-forth
-コピーする
-編集する
+- 以下のように判定ワードを追加：
+
+```forth
 : key-left? ( c -- f ) [char] h = ;  \ 'h' で左
 : key-right? ( c -- f ) [char] l = ; \ 'l' で右
+```
+
+---
 ## ✅ 問題③：ランダムな障害物の配置
 必要：
 random：0〜31の整数
@@ -1143,6 +1154,8 @@ forth
 コピーする
 編集する
 32 random   \ 0〜31 の乱数
+
+---
 ## ✅ 問題④：衝突判定（SCR 相当）
 必要：
 描画された位置に * があるかどうかを調べる
@@ -1156,6 +1169,7 @@ forth
 
 Gforth なら CREATE + ALLOT で2次元バッファが構築できます。
 
+---
 ## ✅ 問題⑤：ループと時間制御（WAIT）
 必要：
 WAIT or SLEEP 相当

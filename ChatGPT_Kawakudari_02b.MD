@@ -700,7 +700,11 @@ test-raw-input
 ```
 gforth rawinput.fs
 ```
-を実行してから test-raw-input を実行しましたが、  
+を実行してから
+```
+test-raw-input
+```
+を実行しましたが、  
 
 ```
 :2: Called function of unfinished named C library

@@ -538,7 +538,7 @@ This is because `add-header` is a **hint word** that prompts the inclusion of he
 
 ## ✅ Fix (change `rawinput.fs` as follows)
 
-forth
+```forth
 \ rawinput.fs -- 1-character input mode using termios
 
 require libcc.fs
@@ -741,7 +741,7 @@ When an error occurs in Gforth's `c-library ... end-c-library`, the library rema
 The following code has been 100% verified to work with `Gforth 0.7.3`.
 Please paste it directly into `rawinput.fs`:
 
-forth
+```forth
 \ rawinput.fs -- 1-character input mode using termios (compatible with Gforth 0.7.3)
 
 require libcc.fs
@@ -855,7 +855,7 @@ calling it results in `“Called function of unfinished named C library”`
 ## ✅ 1. Are there any typos or blank lines in the `c-library ~ end-c-library` block?
 For example:
 
-forth
+```forth
 c-library termios
 
 c-function tcgetattr tcgetattr a n -- n
@@ -964,7 +964,7 @@ Great self-resolution.This question is a very essential and important learning o
 ## ✅ In conclusion:
 A message such as “libtool compile failed” means that Gforth's libcc is trying to build a dynamic library using an internal C compiler, but failed due to the absence of libtool.
 
-** When you see a message like this, here is a systematic explanation of “how to investigate and how to judge.” 
+When you see a message like this, here is a systematic explanation of **“how to investigate and how to judge.”** 
 
 ## 🔍 Step 1: How to read the error message
 The message you saw:
@@ -1026,9 +1026,9 @@ By tracing how `libtool` is called within this file, you can understand the mech
 ## ✅ Method 4: Check the `README` or dependency packages of `Gforth`
 Build dependency packages for `Gforth` (some are also required at runtime):
 
-`bash
+```bash
 sudo apt install build-essential libtool-bin
-`
+```
 
 ## ✅ Lesson: Three steps to take when you don't immediately understand the meaning of an error message
 
@@ -1114,7 +1114,7 @@ The following functions need to be “**explicitly designed and implemented**”
 
 - Create atxy as follows:
 
-forth
+```forth
 : atxy ( x y -- )
 27 emit [char] [ emit
 swap . [char] ; emit.
@@ -1226,6 +1226,7 @@ Creating a river rafting game in Forth-DWC will teach you the following:
 If desired, we can immediately provide **Step 1**: “**The skeleton of the smallest Forth game engine (1-character drawing + left/right movement)**.”
 
 Would you like to start from there? Or would you prefer to proceed from another element? Please let us know where you would like to begin.
+
 
 
 

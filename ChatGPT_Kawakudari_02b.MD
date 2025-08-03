@@ -1056,9 +1056,9 @@ sudo apt install build-essential libtool-bin
 
 - `Gforth libcc.fs` 実装: `/usr/share/gforth/0.7.3/libcc.fs`
 
-- `libtool-bin` パッケージ: `packages.debian.org`
+- `libtool-bin` パッケージ: [packages.debian.org](https://packages.debian.org/search?keywords=libtool-bin)
 
-- `StackOverflow` 検索: `"libtool compile failed" site:stackoverflow.com`
+- `StackOverflow` 検索: ["libtool compile failed" site:stackoverflow.com](https://stackoverflow.com/nocaptcha?s=8e70d4b2-3587-4524-85c4-9e44d04bbc3e)  
 
 ご希望であれば、「strace の使い方」や「gforth の内部の構造を見る方法」もサポートできます。
 

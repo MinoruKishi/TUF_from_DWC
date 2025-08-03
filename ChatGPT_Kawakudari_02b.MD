@@ -714,9 +714,6 @@ test-raw-input
 が出てしまいました。なぜでしょうか？
 
 
-
-2/2
-
 # ChatGPTの返事：  
 とても良い確認です。そして、発生しているエラー：
 
@@ -802,24 +799,24 @@ Gforth プロンプトが出たら：
 test-raw-input
 ```
 ## 🧼 それでもうまくいかない場合
-対策1：セッション再起動
-gforth セッション内でエラーが出た状態が残っていると、その後も失敗し続けることがあります。
-→ Ctrl+D または exit で一度終了し、再実行してください。
+### 対策1：セッション再起動
+`gforth` セッション内でエラーが出た状態が残っていると、その後も失敗し続けることがあります。
+→ `Ctrl+D` または `exit` で一度終了し、再実行してください。
 
-対策2：キャッシュの削除
-Gforth は .fi や .o ファイルを作ることがあります。次のように削除：
+### 対策2：キャッシュの削除
+`Gforth` は `.fi` や `.o` ファイルを作ることがあります。次のように削除：
 
-bash
-コピーする
-編集する
+```bash
 rm -f rawinput.fi rawinput.o
-## ✅ まとめ
-項目	内容
-エラーの本質	c-library の中での定義エラーにより「未完成ライブラリ」と判定された
-対策	正しく定義された c-library ... end-c-library を書き直す（上記コード）
-再試行方法	gforth rawinput.fs → test-raw-input、うまくいかなければ exit してやり直す
+```
 
-次のステップとして atxy や draw-char の実装に進むこともできますし、
+## ✅ まとめ
+|項目	|内容|
+|エラーの本質	|c-library の中での定義エラーにより「未完成ライブラリ」と判定された|
+|対策	|正しく定義された `c-library ... end-c-library` を書き直す（上記コード）|
+|再試行方法	|`gforth rawinput.fs` → `test-raw-input`、うまくいかなければ `exit` してやり直す
+
+次のステップとして `atxy` や `draw-char` の実装に進むこともできますし、
 このまま「キー入力部分だけ先に完成させたい」などのご希望があれば、そちらに沿ってご案内できます。
 
 どうしましょうか？
@@ -831,27 +828,32 @@ rm -f rawinput.fi rawinput.o
 
 # 私の質問：  
 まだエラーが解決していません。
-enable-rawを実行するときに以下のワードを実行するとCalled function of unfinished named C libraryが発生します。なぜですか？
-　tcgetattr
+`enable-raw`を実行するときに以下のワードを実行すると
+```
+Called function of unfinished named C library
+```
+が発生します。なぜですか？
+
+```
+  tcgetattr
 　tcsetattr
+```
 
 
 # ChatGPTの返事：  
 ありがとうございます。非常に重要な症状報告です。
-あなたの環境で tcgetattr や tcsetattr を呼ぶと 「Called function of unfinished named C library」 が発生するということは、c-library ... end-c-library の定義が途中で失敗しているか、libcc が libc からその関数を見つけられていないことが原因です。
+あなたの環境で `tcgetattr` や `tcsetattr` を呼ぶと `「Called function of unfinished named C library」`が発生するということは、`c-library ... end-c-library` の定義が途中で失敗しているか、`libcc` が `libc` からその関数を見つけられていないことが原因です。
 
 ## ✅ 問題の核心
-Gforth 0.7.3 では、c-library ブロック内でエラーがあると、
-end-c-library が完了しない → 関数が「未完成なライブラリ」に属したままになる →
-それを呼ぼうとすると「Called function of unfinished named C library」になる
+`Gforth 0.7.3` では、`c-library` ブロック内でエラーがあると、
+`end-c-library` が完了しない → 関数が「未完成なライブラリ」に属したままになる →
+それを呼ぼうとすると`「Called function of unfinished named C library」`になる
 
 ## ✅ チェックポイント一覧
-## ✅ 1. c-library ～ end-c-library のブロックに誤字や空行がないか？
+## ✅ 1. `c-library ～ end-c-library` のブロックに誤字や空行がないか？
 たとえば、以下のような例：
 
-forth
-コピーする
-編集する
+```forth
 c-library termios
 
 c-function tcgetattr tcgetattr a n -- n
@@ -859,11 +861,12 @@ c-function tcsetattr tcsetattr n a n -- n
 c-function getchar getchar -- n
 
 end-c-library
+```
 この部分に 空行・スペルミス・無関係な文字があると、途中でパースが壊れて未定義になります。
 
-## ✅ 2. Gforth で libc の関数が見つけられる状態にあるか？
-libcc は libc.so.6 などから dlsym() によって関数を動的取得します。
-ところが、環境によっては tcgetattr や tcsetattr が libc.so.6 ではなく別のライブラリに定義されているケースもあります。
+## ✅ 2. `Gforth` で `libc` の関数が見つけられる状態にあるか？
+`libcc` は `libc.so.6` などから `dlsym()` によって関数を動的取得します。
+ところが、環境によっては `tcgetattr` や `tcsetattr` が `libc.so.6` ではなく別のライブラリに定義されているケースもあります。
 
 ## 👉 対策：関数がどこにあるか調べる
 bash

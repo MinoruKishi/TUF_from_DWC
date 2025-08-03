@@ -812,10 +812,11 @@ rm -f rawinput.fi rawinput.o
 ```
 
 ## ✅ まとめ
-|項目	|内容|
-|エラーの本質	|c-library の中での定義エラーにより「未完成ライブラリ」と判定された|
-|対策	|正しく定義された `c-library ... end-c-library` を書き直す（上記コード）|
-|再試行方法	|`gforth rawinput.fs` → `test-raw-input`、うまくいかなければ `exit` してやり直す
+
+| 項目	| 内容 |
+| エラーの本質	| c-library の中での定義エラーにより「未完成ライブラリ」と判定された |
+| 対策	| 正しく定義された `c-library ... end-c-library` を書き直す（上記コード） |
+| 再試行方法	| `gforth rawinput.fs` → `test-raw-input`、うまくいかなければ `exit` してやり直す |
 
 次のステップとして `atxy` や `draw-char` の実装に進むこともできますし、
 このまま「キー入力部分だけ先に完成させたい」などのご希望があれば、そちらに沿ってご案内できます。

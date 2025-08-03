@@ -869,21 +869,18 @@ end-c-library
 ところが、環境によっては `tcgetattr` や `tcsetattr` が `libc.so.6` ではなく別のライブラリに定義されているケースもあります。
 
 ## 👉 対策：関数がどこにあるか調べる
-bash
-コピーする
-編集する
+```bash
 nm -D /lib/i386-linux-gnu/libc.so.6 | grep tcgetattr
-が出力を返す場合は libc 内にあります → 問題なし
-出力されない場合は、libc 以外にある or スタティックリンクしかされていない可能性があります。
+```
+が出力を返す場合は `libc` 内にあります → 問題なし
+出力されない場合は、`libc` 以外にある `or` スタティックリンクしかされていない可能性があります。
 
 ## ✅ 3. 簡単な C ライブラリの関数で動作確認してみる
-tcgetattr や tcsetattr は構造体と絡むため、libcc にとってやや高度です。
-まずは 単純な libc 関数（例：getchar）で libcc が正常動作しているかを試してください。
+`tcgetattr` や `tcsetattr` は構造体と絡むため、`libcc` にとってやや高度です。
+まずは 単純な `libc` 関数（例：getchar）で `libcc` が正常動作しているかを試してください。
 
-テスト用コード：testlibc.fs
-forth
-コピーする
-編集する
+テスト用コード：`testlibc.fs`
+```forth
 require libcc.fs
 
 c-library ctest
@@ -893,40 +890,43 @@ end-c-library
 : demo ( -- ) 
   ." Press a key: " cr 
   getchar . cr ;
-bash
-コピーする
-編集する
+```
+```bash
 gforth testlibc.fs
-forth
-コピーする
-編集する
+```
+
+```forth
 demo
+```
+
 ## ✅ 成功する → libcc 自体は正常
 ## ❌ 失敗する → libcc が環境で壊れている or 不完全ビルド
+```
+
 ## ✅ ワークアラウンド：外部 C ラッパーを作る方法もある
-もしどうしても tcgetattr 等が libcc 経由で動作しない場合は：
+もしどうしても `tcgetattr` 等が `libcc` 経由で動作しない場合は：
 
-termios.c を作成（Cコードで enable_raw(), disable_raw() などまとめる）
+- termios.c を作成（Cコードで enable_raw(), disable_raw() などまとめる）
 
-gcc -shared -fPIC -o librawterm.so termios.c でビルド
+- gcc -shared -fPIC -o librawterm.so termios.c でビルド
 
-Forth 側で librawterm.so を libcc 経由で呼ぶ
+- Forth 側で librawterm.so を libcc 経由で呼ぶ
 
 という構成も可能です。ご希望があればサンプルコードを出せます。
 
 ## ✅ まとめ
-項目	対処法
-c-library が途中で失敗	空行・スペルミス・文法ミスがないか再確認
-tcgetattr が libc にない	nm -D でシンボル確認（libc.so.6 に存在するか）
-libcc 自体の動作確認	getchar だけでテスト
-回避方法	ラッパーCライブラリを自作して呼ぶことも可能
+|項目	|対処法|
+|c-library が途中で失敗	|空行・スペルミス・文法ミスがないか再確認|
+|tcgetattr が libc にない	|nm -D でシンボル確認（libc.so.6 に存在するか）|
+|libcc 自体の動作確認	|getchar だけでテスト|
+|回避方法	|ラッパーCライブラリを自作して呼ぶことも可能|
 
 ## ✅ 次の提案
 以下のどちらかを選んでいただければ、すぐにサポートできます：
 
-### ✅ getchar だけを使ったミニテストで libcc が動いているか確認したい
+- ✅ getchar だけを使ったミニテストで libcc が動いているか確認したい
 
-### 🔧 Cで termios ラッパーを作って、それを Gforth から呼び出す方向に進みたい
+- 🔧 Cで termios ラッパーを作って、それを Gforth から呼び出す方向に進みたい
 
 いずれを希望されますか？もしくは両方見たい、でも大丈夫です。
 

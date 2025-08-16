@@ -1,9 +1,9 @@
-**私の質問：**
+*私の質問：*
 
 forth-dwcを勉強中です。リファレンスマニュアルが欲しいのですが、作成できますか？
 https://github.com/CCurl/forth-dwc
 
-**ChatGPT:**
+*ChatGPT:*
 
 思考時間: 24s
 
@@ -307,14 +307,14 @@ PC++。
 
 情報源
 
-**私の質問：**
+*私の質問：*
 
 用語の意味を教えて下さい。以下に出てくるcellを教えて下さい。 extern cell
 fOpen(cell name, cell mode); extern void fClose(cell fh); extern cell
 fRead(cell buf, cell sz, cell fh); extern cell fWrite(cell buf, cell sz,
 cell fh); extern cell fSeek(cell fh, cell offset);
 
-**ChatGPT:**
+*ChatGPT:*
 
 この場合の **cell** は、forth-dwc における「Forth のセル型」を C
 言語上で表したものです。
@@ -426,14 +426,14 @@ extern cell fSeek(cell fh, cell offset);
 のどちらになるかを\
 あなたの環境で即座に確認する C コードも作れます。
 
-**私の質問：**
+*私の質問：*
 
 まだまだ知らないことがたくさんあります。system.cに手を加えてみて拡張機能を追加したいのですが、まずはdwc-vm.hをちゃんと理解したいです。次の３行を理解したいのですが、教えてもらえますか？
 enum { COMPILE=1, DEFINE, INTERPRET, COMMENT }; typedef struct { ucell
 xt; byte sz; byte fl; byte ln; char nm\[NAME_LEN+1\]; } DE_T; typedef
 struct { char \*name; ucell value; } NVP_T;
 
-**ChatGPT:**
+*ChatGPT:*
 
 いいですね。挙げてくださった3行は、**実行状態の定数**、**辞書エントリの1件分**、**名前と値のペア**を表しています。順にサッと分解します。
 
@@ -644,3 +644,4 @@ forth_define_constant(p-\>name, p-\>value);
 フォームの始まり
 
 フォームの終わり
+

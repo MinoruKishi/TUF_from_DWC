@@ -1,9 +1,9 @@
-*私の質問：*
+#**私の質問：**
 
 forth-dwcを勉強中です。リファレンスマニュアルが欲しいのですが、作成できますか？
 https://github.com/CCurl/forth-dwc
 
-*ChatGPT:*
+#**ChatGPT:**
 
 思考時間: 24s
 
@@ -644,4 +644,5 @@ forth_define_constant(p-\>name, p-\>value);
 フォームの始まり
 
 フォームの終わり
+
 

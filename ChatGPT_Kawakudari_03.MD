@@ -3,10 +3,11 @@
 forth-dwcを勉強中です。リファレンスマニュアルが欲しいのですが、作成できますか？
 https://github.com/CCurl/forth-dwc
 
-# **ChatGPT:**
+# ChatGPT:
 
 思考時間: 24s
 
+```txt
 Forth-dwc リファレンスマニュアル（ドラフト）
 
 **forth-dwc リファレンスマニュアル（ドラフト）**
@@ -51,10 +52,9 @@ C/Forth）
 DWC には 4
 つの状態（**State**）があり、**空白中の制御文字**で状態を切替えます。
 
-  -----------------------------------------------------------------------
-  **状態**         **意味**      **既定動作**
-  ---------------- ------------- ----------------------------------------
-  COMPILE          コンパイル    語/数をコンパイル
+|  **状態**    |     **意味**  |    **既定動作**|
+| --- | --- | --- |
+|  COMPILE     |     コンパイル |   語/数をコンパイル
 
   DEFINE           定義開始      語を辞書に追加し、COMPILE へ
 
@@ -281,6 +281,8 @@ PC++。
 
 - 2025-08-11 初版（ドラフト）
 
+```
+
 作れます！まずドラフト版の「forth-dwc
 リファレンスマニュアル」を右側のキャンバスに用意しました。内容は、概要／ビルド方法／状態遷移（ColorForth
 影響）／DWORD-Code仕様／全プリミティブのスタック効果表／組み込み手順などをまとめています。
@@ -307,14 +309,17 @@ PC++。
 
 情報源
 
-*私の質問：*
+
+# 私の質問：
 
 用語の意味を教えて下さい。以下に出てくるcellを教えて下さい。 extern cell
+```c
 fOpen(cell name, cell mode); extern void fClose(cell fh); extern cell
 fRead(cell buf, cell sz, cell fh); extern cell fWrite(cell buf, cell sz,
 cell fh); extern cell fSeek(cell fh, cell offset);
+```
 
-*ChatGPT:*
+# ChatGPT:
 
 この場合の **cell** は、forth-dwc における「Forth のセル型」を C
 言語上で表したものです。
@@ -426,14 +431,16 @@ extern cell fSeek(cell fh, cell offset);
 のどちらになるかを\
 あなたの環境で即座に確認する C コードも作れます。
 
-*私の質問：*
+# 私の質問：
 
 まだまだ知らないことがたくさんあります。system.cに手を加えてみて拡張機能を追加したいのですが、まずはdwc-vm.hをちゃんと理解したいです。次の３行を理解したいのですが、教えてもらえますか？
+```c
 enum { COMPILE=1, DEFINE, INTERPRET, COMMENT }; typedef struct { ucell
 xt; byte sz; byte fl; byte ln; char nm\[NAME_LEN+1\]; } DE_T; typedef
 struct { char \*name; ucell value; } NVP_T;
+```
 
-*ChatGPT:*
+# ChatGPT:
 
 いいですね。挙げてくださった3行は、**実行状態の定数**、**辞書エントリの1件分**、**名前と値のペア**を表しています。順にサッと分解します。
 
@@ -470,6 +477,7 @@ c
 
 コピーする編集する
 
+```c
 typedef struct {
 
 ucell xt;
@@ -483,6 +491,7 @@ byte ln;
 char nm\[NAME_LEN+1\];
 
 } DE_T;
+```
 
 DE_T は **D**ictionary
 **E**ntry（辞書エントリ）1件を表す構造体です。Forth
@@ -542,6 +551,7 @@ c
 
 コピーする編集する
 
+```c
 typedef struct {
 
 char \*name;
@@ -549,6 +559,7 @@ char \*name;
 ucell value;
 
 } NVP_T;
+```
 
 NVP_T は **N**ame--**V**alue **P**air、つまり
 **名前と数値の対応表**です。
@@ -564,6 +575,7 @@ c
 
 コピーする編集する
 
+```c
 static const NVP_T file_modes\[\] = {
 
 {\"r\", F_READ}, // C 側の値を ucell で
@@ -577,6 +589,7 @@ static const NVP_T file_modes\[\] = {
 {NULL, 0} // 終端
 
 };
+```
 
 - 外側インタプリタや初期化コードでこの配列をなめて、Forth
   環境に**定数名→数値**を登録します。
@@ -592,11 +605,13 @@ c
 
 コピーする編集する
 
+```c
 typedef intptr_t cell; // ポインタ幅の符号付き整数
 
 typedef uintptr_t ucell; // ポインタ幅の符号なし整数
 
 typedef unsigned char byte;
+```
 
 - これにより「ポインタ・整数・アドレス」を**同じサイズ**で安全にやり取りできます（32bit
   環境なら4バイト、64bitなら8バイト）。
@@ -609,6 +624,7 @@ c
 
 コピーする編集する
 
+```c
 // 新しい語を辞書に追加（ざっくり例）
 
 DE_T \*de = alloc_de();
@@ -632,6 +648,7 @@ for (const NVP_T \*p = file_modes; p-\>name; ++p) {
 forth_define_constant(p-\>name, p-\>value);
 
 }
+```
 
 ------------------------------------------------------------------------
 
@@ -644,8 +661,3 @@ forth_define_constant(p-\>name, p-\>value);
 フォームの始まり
 
 フォームの終わり
-
-
-
-
-

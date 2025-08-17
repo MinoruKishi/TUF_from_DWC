@@ -165,9 +165,9 @@ extern cell fSeek(cell fh, cell offset);
 
 まだまだ知らないことがたくさんあります。system.cに手を加えてみて拡張機能を追加したいのですが、まずはdwc-vm.hをちゃんと理解したいです。次の３行を理解したいのですが、教えてもらえますか？
 ```c
-enum { COMPILE=1, DEFINE, INTERPRET, COMMENT }; typedef struct { ucell
-xt; byte sz; byte fl; byte ln; char nm\[NAME_LEN+1\]; } DE_T; typedef
-struct { char \*name; ucell value; } NVP_T;
+ enum { COMPILE=1, DEFINE, INTERPRET, COMMENT };  
+ typedef struct { ucell xt; byte sz; byte fl; byte ln; char nm\[NAME_LEN+1\]; } DE_T;  
+ typedef struct { char \*name; ucell value; } NVP_T;  
 ```
 
 # ChatGPT:
@@ -295,9 +295,6 @@ NVP_T は **N**ame--**V**alue **P**air、つまり
 
   - 例：
 
-c
-
-コピーする編集する
 
 ```c
 static const NVP_T file_modes\[\] = {
@@ -373,4 +370,10 @@ forth_define_constant(p-\>name, p-\>value);
 必要なら、fl の**ビット割り当て**や sz
 の\*\*単位（セル/バイト）\*\*を、実際の #define
 と使用箇所（add-word/インライン展開処理あたり）を一緒に読み解いて、図付きで追いかけます。次はそのあたりを深掘りしましょうか？
+
+  
+  
+  
+  
+[ トップに戻る](README.md)  
 

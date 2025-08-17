@@ -35,16 +35,18 @@ https://github.com/CCurl/forth-dwc
 
 このまま拡充していきます。まずは(1)の「上位語の完全一覧」を追加してよいですか？
 
-情報源
+
 
 
 # 私の質問：
 
-用語の意味を教えて下さい。以下に出てくるcellを教えて下さい。 extern cell
+用語の意味を教えて下さい。以下に出てくるcellを教えて下さい。  
 ```c
-fOpen(cell name, cell mode); extern void fClose(cell fh); extern cell
-fRead(cell buf, cell sz, cell fh); extern cell fWrite(cell buf, cell sz,
-cell fh); extern cell fSeek(cell fh, cell offset);
+ extern cell fOpen(cell name, cell mode);  
+ extern void fClose(cell fh);  
+ extern cell fRead(cell buf, cell sz, cell fh);  
+ extern cell fWrite(cell buf, cell sz, cell fh);  
+ extern cell fSeek(cell fh, cell offset);  
 ```
 
 # ChatGPT:
@@ -73,11 +75,11 @@ cell と呼びます。
 
 GitHub の dwc-vm.h を見ると、環境に合わせて typedef されています。
 
-c
-
-コピーする編集する
+```c
 
 typedef intptr_t cell; // 実際にはポインタ幅と同じ符号付き整数
+
+```
 
 - intptr_t は C 標準で「ポインタと同じサイズの符号付き整数」。
 
@@ -90,11 +92,11 @@ typedef intptr_t cell; // 実際にはポインタ幅と同じ符号付き整数
 
 これらは C 側から Forth のファイル I/O を実装するラッパーです。
 
-c
-
-コピーする編集する
+```c
 
 extern cell fOpen(cell name, cell mode);
+
+```
 
 - name は Forth 側の文字列（アドレス）
 
@@ -102,19 +104,19 @@ extern cell fOpen(cell name, cell mode);
 
 - 戻り値はファイルハンドル（cell 型）
 
-c
-
-コピーする編集する
+```c
 
 extern void fClose(cell fh);
 
+```
+
 - fh = ファイルハンドル
 
-c
-
-コピーする編集する
+```c
 
 extern cell fRead(cell buf, cell sz, cell fh);
+
+```
 
 - buf = 読み込む先のバッファアドレス
 
@@ -124,19 +126,19 @@ extern cell fRead(cell buf, cell sz, cell fh);
 
 - 戻り値は実際に読んだバイト数
 
-c
-
-コピーする編集する
+```c
 
 extern cell fWrite(cell buf, cell sz, cell fh);
 
+```
+
 - 書き込み版
 
-c
-
-コピーする編集する
+```c
 
 extern cell fSeek(cell fh, cell offset);
+
+```
 
 - ファイル位置を変更
 
@@ -201,9 +203,6 @@ struct { char \*name; ucell value; } NVP_T;
 
 **2)**
 
-c
-
-コピーする編集する
 
 ```c
 typedef struct {
@@ -275,9 +274,6 @@ DE_T は **D**ictionary
 
 **3)**
 
-c
-
-コピーする編集する
 
 ```c
 typedef struct {
@@ -329,9 +325,6 @@ static const NVP_T file_modes\[\] = {
 実装ではだいたい次のようになっています（正確な定義は dwc-vm.h
 をご確認ください）。
 
-c
-
-コピーする編集する
 
 ```c
 typedef intptr_t cell; // ポインタ幅の符号付き整数
@@ -348,9 +341,6 @@ typedef unsigned char byte;
 
 **使い所のイメージ（超短例）**
 
-c
-
-コピーする編集する
 
 ```c
 // 新しい語を辞書に追加（ざっくり例）
@@ -384,8 +374,3 @@ forth_define_constant(p-\>name, p-\>value);
 の\*\*単位（セル/バイト）\*\*を、実際の #define
 と使用箇所（add-word/インライン展開処理あたり）を一緒に読み解いて、図付きで追いかけます。次はそのあたりを深掘りしましょうか？
 
-情報源
-
-フォームの始まり
-
-フォームの終わり

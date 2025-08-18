@@ -22,18 +22,18 @@ https://github.com/CCurl/forth-dwc/tree/main
 
 ## Deepening understanding of forth-dwc with ChatGPT 
 
-[ First, I asked ChatGPT how well it understands the FORTH language ](ChatGPT_Kawakudari_01.MD)  
+[ First, I asked ChatGPT how well it understands the FORTH language ](ChatGPT_Kawakudari_01_ENG.MD)  
 File:ChatGPT_Kawakudari_01  
   
 I like the “river rafting game” in IchigoJam BASIC, so I wanted to replace it with FORTH language. I asked ChatGPT (4o) what I needed to consider for that.I thought it might be rejected, but I received a fairly specific and accurate response.  
   
-[ Can ChatGPT (4o) and I develop the program as intended? ](ChatGPT_Kawakudari_02b.MD)  
+[ Can ChatGPT (4o) and I develop the program as intended? ](ChatGPT_Kawakudari_02b_ENG.MD)  
 File:ChatGPT_Kawakudari_02  
   
 The purpose of this exercise was to develop a program that actually runs and can be confirmed to work as intended.I wanted to see if ChatGPT (4o) and I could work together to achieve that goal.  
   
   
-[ I asked a few questions to deepen my understanding of the forth-dwc source code ](ChatGPT_Kawakudari_03.MD)  
+[ I asked a few questions to deepen my understanding of the forth-dwc source code ](ChatGPT_Kawakudari_03_ENG.MD)  
 File:ChatGPT_Kawakudari_03  
 From here on, I used ChatGPT (5)  
   

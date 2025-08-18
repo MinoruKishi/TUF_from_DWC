@@ -114,7 +114,7 @@ return 0;
 ### Explanation and correspondence
 
 | IchigoJam BASIC       | Meaning                                   | Correspondence in C language                     |  
-|-----------------------|-----------------------            --------|----------------            ----------------------|  
+| --- | --- | --- |  
 | `CLS`                 | Clear screen                              | `system(“clear”)`                                |  
 | `X=16`                | Initial position                          | `int x = 16;`                |  
 | `LC X,5:? “ì”`        | Display character at X coordinate, line 5 | `screen[5][x] = ‘O’;` |  

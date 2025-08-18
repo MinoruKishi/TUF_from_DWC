@@ -10,7 +10,7 @@ Thinking time: 24s
 
 Yes, I can! First, I have prepared a draft version of the “forth-dwc
 Reference Manual” on the right side of the canvas.
-[ Click here ]( Forth-dwc_ReferenceManual_0.01.md)
+[ Click here ]( Forth-dwc_ReferenceManual_0.01_ENG.md)
 
 The content includes an overview, build instructions, state transitions (ColorForth
 impact), DWORD-Code specifications, a stack effect table for all primitives, and built-in procedures.
